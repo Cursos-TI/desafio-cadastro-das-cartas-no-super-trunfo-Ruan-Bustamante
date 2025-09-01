@@ -11,13 +11,12 @@ int main(){
         float pib;
         int num_ponto_tur;
         float dens_pop;
-        float pib_per_capta;
-        float super_poder;
+        float pib_per_capita;
     };
     
     struct Carta carta1 = { // Definindo a primeira carta com valores pré-definidos
         .nome = "São Paulo",
-        .estado = "A",
+        .estado = 'A',
         .codigo = "A01",
         .populacao = 12325000,
         .area = 1521.11,
@@ -27,12 +26,11 @@ int main(){
 
     // Calculos para a carta1
     carta1.dens_pop = carta1.populacao / carta1.area;
-    carta1.pib_per_capta = carta1.pib / carta1.populacao;
-    carta1.super_poder = (float)carta1.populacao + carta1.area + carta1.pib + (float)carta1.num_ponto_tur + carta1.pib_per_capta + (1.0f / carta1.dens_pop);
+    carta1.pib_per_capita = carta1.pib / carta1.populacao;
 
     struct Carta carta2 = { // Definindo a segunda carta com valores pré-definidos
         .nome = "Rio de Janeiro",
-        .estado = "B",
+        .estado = 'B',
         .codigo = "B02",
         .populacao = 6748000,
         .area = 1200.25,
@@ -42,109 +40,60 @@ int main(){
 
     // Calculos para a carta2
     carta2.dens_pop = carta2.populacao / carta2.area;
-    carta2.pib_per_capta = carta2.pib / carta2.populacao;
-    carta2.super_poder = (float)carta2.populacao + carta2.area + carta2.pib + (float)carta2.num_ponto_tur + carta2.pib_per_capta + (1.0f / carta2.dens_pop);
+    carta2.pib_per_capita = carta2.pib / carta2.populacao;
 
-    int escolha_usuario;
+    // Menu e Escolhas
+    int escolha1, escolha2;
+    float soma1 = 0, soma2 = 0;
 
     printf("*** Bem vindo ao Super Trunfo Paises! ***\n\n");
-    printf("Escolha um atributo para a batalha:\n");
+    printf("Escolha dois atributos DIFERENTES para a batalha:\n");
     printf("1 - População\n");
     printf("2 - Area\n");
     printf("3 - PIB\n");
     printf("4 - Ponstos Turisticos\n");
     printf("5 - Densidade Populacional\n");
-    printf("6 - PIB per capta\n");
-    printf("7 - SUPER PODER\n");
-    printf("Digite o número da sua escolha: ");
-    scanf("%d", &escolha_usuario);
-    printf("\n***Resultado da batalha***\n");
+    printf("6 - PIB per capita\n");
+    printf("Digite o número da sua PRIMEIRA escolha: ");
+    scanf("%d", &escolha1);
+    printf("Digite o número da sua SEGUNDA escolha: ");
+    scanf("%d", &escolha2);
 
-    // Exibe os dados para comparação
-    switch (escolha_usuario)
-    {
-    case 1: //População (Maior vence)
-        printf("Atributo: População\n");
-        printf("Valores: Carta 1 (%lu) x Carta 2 (%lu)\n", carta1.populacao, carta2.populacao);
-        if (carta1.populacao > carta2.populacao) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.populacao < carta2.populacao) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 2: //Area (Maior vence)
-        printf("Atributo: Área\n");
-        printf("Valores: Carta 1 (%.2f km2) x Carta 2 (%.2f km2)\n", carta1.area, carta2.area);
-        if (carta1.area > carta2.area) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.area < carta2.area) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 3: //PIB (Maior vence)
-        printf("Atributo: PIB\n");
-        printf("Valores: Carta 1 (%.2f Bilhões) x Carta 2 (%.2f Bilhões)\n", carta1.pib, carta2.pib);
-        if (carta1.pib > carta2.pib) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.pib < carta2.pib) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 4: //Número de Pontos Turísticos (Maior vence)
-        printf("Atributo: Número de Pontos Turísticos\n");
-        printf("Valores: Carta 1 (%d) x Carta 2 (%d)\n", carta1.num_ponto_tur, carta2.num_ponto_tur);
-        if (carta1.num_ponto_tur > carta2.num_ponto_tur) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.num_ponto_tur < carta2.num_ponto_tur) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 5: //Densidade Populacional (Menor vence)
-        printf("Atributo: Densidade Populacional\n");
-        printf("Valores: Carta 1 (%.2f hab/km2) x Carta 2 (%.2f hab/km2)\n", carta1.dens_pop, carta2.dens_pop);
-        if (carta1.dens_pop < carta2.dens_pop) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.dens_pop > carta2.dens_pop) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 6: //PIB per Capita (Maior vence)
-        printf("Atributo: PIB per Capita\n");
-        printf("Valores: Carta 1 (%.2f Reais) x Carta 2 (%.2f Reais)\n", carta1.pib_per_capta, carta2.pib_per_capta);
-        if (carta1.pib_per_capta > carta2.pib_per_capta) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.pib_per_capta < carta2.pib_per_capta) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    case 7: //SUPER PODER (Maior vence)
-        printf("Atributo: SUPER PODER\n");
-        printf("Valores: Carta 1 (%.2f) x Carta 2 (%.2f)\n", carta1.super_poder, carta2.super_poder);
-        if (carta1.super_poder > carta2.super_poder) {
-            printf("Vencedor: Carta 1 (%s)!\n", carta1.nome);
-        } else if (carta1.super_poder < carta2.super_poder) {
-            printf("Vencedor: Carta 2 (%s)!\n", carta2.nome);
-        } else {
-            printf("Resultado: Empate!!\n");
-        }
-        break;
-    
-    default:
-        printf("Erro: Opção Inválida!! Por favor, reinicie e escolha um número de 1 a 7.\n");
-        break;
+    // Validação das Escolhas
+    if (escolha1 == escolha2 || escolha1 < 1 || escolha2 < 1 || escolha1 > 6 || escolha2 > 6) {
+        printf("\nErro! Escolhas inválidas. Reinicie o programa e selecione novamente.\n");
+        return 1;
     }
 
+    // Logica da Soma
+    soma1 += (escolha1 == 1) ? (float)carta1.populacao : (escolha1 == 2) ? carta1.area : (escolha1 == 3) ? carta1.pib :
+             (escolha1 == 4) ? (float)carta1.num_ponto_tur : (escolha1 == 5) ? (1.0f / carta1.dens_pop) :
+             carta1.pib_per_capita;
+    soma2 += (escolha1 == 1) ? (float)carta2.populacao : (escolha1 == 2) ? carta2.area : (escolha1 == 3) ? carta2.pib :
+             (escolha1 == 4) ? (float)carta2.num_ponto_tur : (escolha1 == 5) ? (1.0f / carta2.dens_pop) :
+             carta2.pib_per_capita;
+
+    soma1 += (escolha2 == 1) ? (float)carta1.populacao : (escolha2 == 2) ? carta1.area : (escolha2 == 3) ? carta1.pib :
+             (escolha2 == 4) ? (float)carta1.num_ponto_tur : (escolha2 == 5) ? (1.0f / carta1.dens_pop) :
+             carta1.pib_per_capita;
+    soma2 += (escolha2 == 1) ? (float)carta2.populacao : (escolha2 == 2) ? carta2.area : (escolha2 == 3) ? carta2.pib :
+             (escolha2 == 4) ? (float)carta2.num_ponto_tur : (escolha2 == 5) ? (1.0f / carta2.dens_pop) :
+             carta2.pib_per_capita;
+
+    // Exibe os dados para comparação
+    printf("\n***Resultado da batalha***\n");
+    printf("Atributos escolhidos: %d e %d\n", escolha1, escolha2);
+
+    printf("Soma da Carta 1 (%s): %.2f\n", carta1.nome, soma1);
+    printf("Soma da Carta 2 (%s): %.2f\n", carta2.nome, soma2);
+
+   if (soma1 > soma2) {
+        printf("\n Parabéns! Carta 1 (%s) venceu!\n", carta1.nome);
+   } else if (soma1 < soma2) {
+        printf("\n Parabéns! Carta 2 (%s) venceu!\n", carta2.nome);
+   } else {
+        printf("\nResultado: Empate!\n");
+   }
+   
     return 0;
 }
